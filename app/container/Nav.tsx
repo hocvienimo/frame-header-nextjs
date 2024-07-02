@@ -32,7 +32,7 @@ const linksMenu = [
 
 const Nav = () => {
   const pathname = usePathname();
-  console.log(pathname);
+//   console.log(pathname);
   return (
     <nav className="flex gap-8">
         {linksMenu.map((link, index) => {

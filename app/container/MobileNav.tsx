@@ -8,6 +8,7 @@ import Image from "next/image";
 import Link from "next/link";
 import welcome from "@/public/images/wellcome-imo-vn.png";
 import { CiMenuFries } from "react-icons/ci";
+import SearchForm from "@/components/SearchForm";
 
 
 const linksMenu = [
@@ -31,21 +32,24 @@ const MobileNav = () => {
     };
 
   return (
-    <>
-      <button onClick={toggleMenu}>
-        <CiMenuFries className="text-[28px] text-primary" />
-      </button>
+    <section>
+      <div className="flex items-center">
+        <SearchForm />
+        <button onClick={toggleMenu}>
+          <CiMenuFries className="text-[28px] text-primary" />
+        </button>
+      </div>
       <Sheet open={isOpen} onOpenChange={setIsOpen}>
         <SheetTrigger asChild>
           <div className="hidden" />
         </SheetTrigger>
         <SheetContent className="flex flex-col">
-          {/* logo */}
+          {/* logo brand iMovn */}
           <div className="mt-32 mb-20 m-auto">
             <Link href='/' onClick={closeMenu}>
               <Image
                 src={welcome}
-                width={190}
+                width={180}
                 alt="imo-vn"
                 priority
               />
@@ -67,7 +71,7 @@ const MobileNav = () => {
           </nav>
         </SheetContent>
       </Sheet>
-    </>
+    </section>
   )
 }
 

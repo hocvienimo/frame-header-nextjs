@@ -3,41 +3,58 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Logo from "@/public/images/imo-vn-co-ltd.png";
-import { Button } from "@/components/ui/button";
+import SearchForm from "@/components/SearchForm";
 
 // containars
 import Nav from "./Nav";
 import MobileNav from "./MobileNav";
+import HotlineButton2 from "@/components/HotlineButton2";
+
+import { motion } from "framer-motion";
+import { fadeIn } from "@/lib/variants";
 
 const Header = () => {
-  const [header, setHeader] = useState(false);
+  const [isSticky, setIsSticky] = useState(false);
 
   useEffect(() => {
-    const scrollYPos = window.addEventListener('scroll', () => {
-      window.scrollY > 20 ? setHeader(true) : setHeader (false);
-    });
+    const handleScroll = () => {
+      setIsSticky(window.scrollY > 0);
+    };
 
-    //remove Evants
-    return () => window.removeEventListener('scroll', scrollYPos);
-  });
+    handleScroll(); // Initialize state based on current scroll position
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
 
   return (
-    <header className={`${header ? 'py-1 bg-[rgba(255,255,255,0.9)] shadow-sm dark:bg-[rgba(255,255,255,0.9)]' : 'py-3 dark:bg-transparent'} sticky top-0 z-30 transition-all`}>
+    <header className={`${isSticky ? 'py-1 bg-[rgba(255,255,255,0.9)] shadow-md dark:bg-[rgba(255,255,255,0.9)]' : 'py-1 md:py-2 shadow-md dark:bg-transparent'} sticky top-0 z-30 transition-all`}>
         <div className="container mx-auto flex justify-between items-center">
             {/* logo */}
             <Link href='/'>
                 <Image
                     src={Logo}
                     alt="imo-vn"
-                    priority="true"
-                    className="w-40 xl:w-48"
+                    priority
+                    className="w-36 md:w-48"
                 />
             </Link>
-
+            
             {/* desktop Nav */}
             <div className="hidden xl:flex items-center gap-8">
                 <Nav/>
-                <Button className="text-[#fff]">0902 226 119</Button>
+                <SearchForm/>
+                <motion.div
+                  variants = {fadeIn('left', 0.1)}
+                  initial = 'hidden'
+                  whileInView={'show'}
+                  viewport={{ once:false, amount: 0.2 }}
+                >
+                  <HotlineButton2 text="Hotline: 0902 226 119" containerStyles="block items-center bg-primary" />
+                </motion.div>
             </div>
 
             {/* mobile nav */}

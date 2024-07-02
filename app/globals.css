@@ -7,4 +7,40 @@
   body {
     @apply font-primary leading-loose;
   }
+
+  h1 {
+    @apply font-secondary md:text-7xl text-5xl mt-5 font-bold md:mb-10 mb-5 text-primary md:leading-[72px] leading-[52px];
+  }
+
+  h2 {
+    @apply font-secondary md:text-4xl text-3xl mt-3 font-bold mb-2 text-primary;
+  }
+
+  h3 {
+    @apply font-secondary md:text-4xl text-3xl
+  }
+
+  h4 {
+    @apply font-secondary capitalize font-semibold md:text-lg text-base text-primary
+  }
+
+  p {
+    @apply text-xl text-gray-600 mb-4;
+  }
+
+  ul {
+    @apply text-gray-600 mb-4;
+  }
+
+  ul li {
+    @apply flex items-start gap-1 text-[19px] leading-7 mb-1 ml-2;
+  }
+
+  ul li svg {
+    @apply text-accent flex-shrink-0 mt-1 mr-1;
+  }
+
+  .parallax-wrapper .react-parallax-bgimage {
+    @apply md:max-w-full max-w-fit;
+  }
 }
